@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>User Management</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <link rel="stylesheet" href="{{asset('/css/vendors/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/main.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/vendors/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/vendors/jquery-ui.min.css')}}">
-</head>
+@include ('header')
 <body>
     <div class="container">
         <h1 class="text-center">User Management</h1>
-        <button class="btn-primary add-btn" data-toggle="modal" data-target="#add-user"> Add User</button>
+        <button class="btn-primary add-btn" data-toggle="modal" data-target="#add-user-modal"> Add User</button>
         <table class="row table">
             <th class="col-md-3 text-center">ID</th>
             <th class="col-md-4 text-center">Name</th>
@@ -31,4 +19,6 @@
             @endforeach
         </table>
     </div>
+@include('edit_modal')
 </body>
+@loadLocalJS(/js/main.js)

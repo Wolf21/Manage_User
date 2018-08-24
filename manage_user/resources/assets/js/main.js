@@ -1,0 +1,1 @@
+$('#add-user-modal').on('shown.bs.modal');
