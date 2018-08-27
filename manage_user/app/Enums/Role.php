@@ -10,7 +10,6 @@ namespace App\Enums;
 
 
 use MyCLabs\Enum\Enum;
-
 class Role extends Enum
 {
     const ADMIN = 1;

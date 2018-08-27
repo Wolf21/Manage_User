@@ -11,4 +11,9 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'UserController@listUser');
+Route::get('/login','Auth\LoginController@getLogin')->name('login');
+Route::post('/login','Auth\LoginController@login');
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
