@@ -9,7 +9,7 @@
 namespace App\Http\Service;
 
 
-use App\User;
+use App\Models\User;
 
 class UserService
 {
