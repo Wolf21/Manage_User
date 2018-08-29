@@ -68,9 +68,6 @@ input .input-modal{
     color: #4CAF50;
     text-decoration: none;
 }
-.register-form {
-    display: none;
-}
 
 .text-left {
     text-align: left;
@@ -85,3 +82,19 @@ input .input-modal{
 .sign_out{
     margin-left: 10px;
 }
+
+.save-btn {
+    margin-right: 10px !important;
+}
+
+.close-btn {
+    margin-right: 130px!important;
+}
+
+li {
+    list-style-type: none;
+    margin-left: -18px;
+    padding: 5px;
+    font-size: larger;
+}
+

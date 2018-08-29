@@ -14,4 +14,5 @@ use MyCLabs\Enum\Enum;
 class Message extends Enum
 {
     const IN_VALID_LOGIN = 'Invalid Email or Password';
+    const REGISTER_SUCCESS = 'Register success, Please Login to continue !';
 }

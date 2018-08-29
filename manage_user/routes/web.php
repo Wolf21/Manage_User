@@ -13,7 +13,11 @@
 
 Auth::routes();
 
-Route::get('/', 'UserController@listUser');
-Route::get('/login','Auth\LoginController@getLogin')->name('login');
-Route::post('/login','Auth\LoginController@login');
-Route::get('/logout','Auth\LoginController@logout')->name('logout');
+Route::get('/', 'UserController@index'); //User List
+
+//User Add
+Route::post('/add','UserController@addUser');
+
+//User Edit
+Route::get('/edit','UserController@showEditForm');
+Route::post('/edit','UserController@editUser');
