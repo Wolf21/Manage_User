@@ -9,10 +9,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\Message;
 use App\Http\Requests\UserAdd;
 use App\Http\Requests\UserEdit;
 use App\Http\Service\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -23,43 +25,92 @@ class UserController extends Controller
         self::$userService = new UserService();
     }
 
-    //Get/User List
+    /**
+     * List User
+     * @Method Get
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (index)
+     */
     public function index(){
         $users = self::$userService->listUser();
         return view('index')->with('users',$users);
     }
 
-    //Post/User Add
+
+    /**
+     * Add User
+     * @Method Post
+     * @param UserAdd $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (list-user)
+     * @throws \Throwable
+     */
+
     public function addUser(UserAdd $request) {
         self::$userService->addUser();
         $users = self::$userService->listUser();
-        return view('list-user')->with('users',$users);
+        $view = view('list-user')->with('users',$users)->render();
+
+        return response()->json([
+            'html' => $view,
+            'message' => Message::ADD_USER_SUCCESS
+        ]);
     }
 
-    //Post/User Edit
+    /**
+     * Show Edit Modal
+     * @Method Post
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (edit)
+     */
+
     public function showEditForm(Request $request){
         $user = self::$userService->findUserByUserId();
         return view('edit')->with('user',$user);
     }
 
-    //Post/User Edit Complete
+    /**
+     * Edit User
+     * @Method Post
+     * @param UserEdit $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (list-user)
+     * @throws \Throwable
+     */
+
     public function editUser(UserEdit $request){
          self::$userService->editUser();
         $users = self::$userService->listUser();
-        return view('list-user')->with('users',$users);
+        $view = view('list-user')->with('users',$users)->render();
+        return response()->json([
+            'html' => $view,
+            'message' => Message::EDIT_USER_SUCCESS
+        ]);
     }
 
-    //Post/ Delete Confirm
+    /**
+     * Show Modal to confirm delete
+     * @Method Post
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (delete-confirm)
+     */
+
     public function deleteConfirm(){
         $user = self::$userService->findUserByUserId();
         return view('delete-confirm')->with('user',$user);
     }
 
-    //Post / Delete Complete
+    /**
+     * Delete User
+     * @Method Post
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (list-user)
+     * @throws \Throwable
+     */
+
     public function deleteUser(){
         self::$userService->deleteUser();
         $users = self::$userService->listUser();
-        return view('list-user')->with('users',$users);
+        $view = view('list-user')->with('users',$users)->render();
+        return response()->json([
+            'html' => $view,
+            'message' => Message::DELETE_USER_SUCCESS
+        ]);
     }
 
 }
