@@ -83,9 +83,10 @@ $('.edit-btn').on('click', function () {
     var user_id = trElement.data("user_id");
 
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/edit",
         data: {
+            _token: window.Laravel.csrfToken,
             'user_id': user_id
         },
         success: function success(response) {
@@ -112,7 +113,7 @@ $('#edit-user-modal .save-btn').on('click', function () {
 
     $.ajax({
         type: "POST",
-        url: "/edit",
+        url: "/edit-complete",
         data: data,
         success: function success(response) {
             $('tbody').html('');

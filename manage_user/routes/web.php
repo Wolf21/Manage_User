@@ -17,8 +17,8 @@ Route::get('/', 'UserController@index'); //User List
 Route::post('/add','UserController@addUser');
 
 //User Edit
-Route::get('/edit','UserController@showEditForm');
-Route::post('/edit','UserController@editUser');
+Route::post('/edit','UserController@showEditForm');
+Route::post('/edit-complete','UserController@editUser');
 
 //User delete
 Route::post('/delete-confirm','UserController@deleteConfirm');

@@ -36,25 +36,26 @@ class UserController extends Controller
         return view('list-user')->with('users',$users);
     }
 
-    //Get/User Edit
+    //Post/User Edit
     public function showEditForm(Request $request){
         $user = self::$userService->findUserByUserId();
         return view('edit')->with('user',$user);
     }
 
-    //Post/User Edit
+    //Post/User Edit Complete
     public function editUser(UserEdit $request){
          self::$userService->editUser();
         $users = self::$userService->listUser();
         return view('list-user')->with('users',$users);
     }
 
-    //Post/ DeleteConfirm
+    //Post/ Delete Confirm
     public function deleteConfirm(){
         $user = self::$userService->findUserByUserId();
         return view('delete-confirm')->with('user',$user);
     }
 
+    //Post / Delete Complete
     public function deleteUser(){
         self::$userService->deleteUser();
         $users = self::$userService->listUser();
