@@ -117,13 +117,19 @@ $('#edit-user-modal .save-btn').on('click', function () {
         data: data,
         success: function success(response) {
             $('tbody').html('');
-            $('tbody').html(response);
+            $('tbody').html(response.html);
             var modalElement = $('#edit-user-modal');
             modalElement.modal('hide');
             modalElement.removeClass('fade');
 
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
+
+            $('#message').text(response.message).show().addClass('alert-success');
+
+            setTimeout(function () {
+                $('#message').hide().removeClass('alert-success');
+            }, 5000);
         },
         error: function error(data) {
             var err = data.responseJSON;

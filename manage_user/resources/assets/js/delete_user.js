@@ -1,9 +1,9 @@
 var deleteUserModal = $('#delete-user-modal');
 
-$('.delete-btn').on('click',function () {
-    var trElement = $(this).closest('tr');
-    var user_id = trElement.data("user_id");
+$(document).on('click', '.delete-btn',function () {
+    var rootEl = $(this).closest('tr');
 
+    var user_id = rootEl.data("user_id");
     $.ajax({
         type: "POST",
         url: "/delete-confirm",
@@ -12,13 +12,12 @@ $('.delete-btn').on('click',function () {
             'user_id': user_id
         },
         success: function (response) {
-            $('#delete-user-modal form ').html('');
             $('#delete-user-modal form').html(response);
         }
     })
 });
 
-$('#delete-user-modal .save-btn').on('click',function () {
+$(document).on('click', '#delete-user-modal .save-btn' ,function () {
     var user_id = deleteUserModal.find(".delete-confirm-message").data('user_id');
 
     var data = {
@@ -32,16 +31,16 @@ $('#delete-user-modal .save-btn').on('click',function () {
         data: data,
         success: function (response) {
             $('tbody').html('');
-            $('tbody').html(response);
+            $('tbody').html(response.html);
             var modalElement = $('#delete-user-modal');
             modalElement.modal('hide');
-            modalElement.removeClass('fade');
 
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
+            $('#message').text(response.message).show().addClass('alert-success');
+            setTimeout(() => {
+                $('#message').hide().removeClass('alert-success');
+            }, 5000);
         },
         error: function (data) {
-            console.log(data);
             var err = data.responseJSON;
             if(err){
                 $.each(err.errors, function (key,value) {

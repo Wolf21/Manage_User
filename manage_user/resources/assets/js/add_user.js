@@ -23,13 +23,14 @@ $('#add-user-modal .save-btn').on('click',function () {
         },
         success: function (response) {
             $('tbody').html('');
-            $('tbody').html(response);
+            $('tbody').html(response.html);
             var modalElement = $('#add-user-modal');
             modalElement.modal('hide');
-            modalElement.removeClass('fade');
 
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
+            $('#message').text(response.message).show().addClass('alert-success');
+            setTimeout(() => {
+                $('#message').hide().removeClass('alert-success');
+            }, 5000);
         },
         error: function (data) {
             var err = data.responseJSON;

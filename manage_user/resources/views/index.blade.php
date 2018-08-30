@@ -2,6 +2,7 @@
 <body>
     <div class="container">
         <h1 class="text-left">User Management</h1>
+        <div class="alert-message alert" id="message" style="display: none;"></div>
         {{--<div class="profile">--}}
             {{--<i class="far fa-user"> {{\Cookie::get('email')}}</i>--}}
             {{--<a href="{{url('logout')}}"><i class="fas fa-sign-out-alt "></i></a>--}}

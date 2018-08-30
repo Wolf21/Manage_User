@@ -1,4 +1,4 @@
-@include('header')
+
 <div class="modal fade custom-modal display-table" id="edit-user-modal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">

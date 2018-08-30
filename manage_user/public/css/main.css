@@ -97,4 +97,10 @@ li {
     padding: 5px;
     font-size: larger;
 }
+.alert-message {
+    margin-left: -15px!important;
+    margin-top: 40px!important;
+    font-size: larger;
+}
+
 

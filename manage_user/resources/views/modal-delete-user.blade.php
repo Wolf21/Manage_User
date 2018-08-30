@@ -1,5 +1,4 @@
-@include('header')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="modal fade custom-modal display-table" id="delete-user-modal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">

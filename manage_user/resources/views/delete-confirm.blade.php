@@ -6,4 +6,3 @@
     <button type="button" class="btn btn-default btn-success save-btn">Save</button>
     <button type="button" class="btn btn-default btn-danger close-btn" data-dismiss="modal">Close</button>
 </div>
-@loadLocalJS(/js/delete_user.js)
