@@ -84,7 +84,8 @@ $('#add-user-modal .save-btn').on('click', function () {
         user_id = addUserModal.find("input[name='user_id']").val(),
         user_name = addUserModal.find("input[name='user_name']").val(),
         role = addUserModal.find("option:selected").val(),
-        password = addUserModal.find("input[name='password']").val();
+        password = addUserModal.find("input[name='password']").val(),
+        confirm_password = addUserModal.find("input[name='confirm_password']").val();
 
     $.ajax({
         type: "POST",
@@ -95,7 +96,8 @@ $('#add-user-modal .save-btn').on('click', function () {
             'user_id': user_id,
             'user_name': user_name,
             'role': role,
-            'password': password
+            'password': password,
+            'confirm_password': confirm_password
         },
         success: function success(response) {
             $('tbody').html('');

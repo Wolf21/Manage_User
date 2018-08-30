@@ -1,11 +1,9 @@
 @include('header')
-<meta name="csrf-token" content="{{ csrf_token() }}">
  <div class="modal fade custom-modal display-table" id="add-user-modal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form>
-
                 <div class="modal-body row">
                     <div class="col-md-5 row">
                         <label class="label-input col-md-4">User ID</label>
