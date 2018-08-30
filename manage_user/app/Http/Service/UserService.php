@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cuongnq
- * Date: 24/08/2018
- * Time: 11:14
- */
 
 namespace App\Http\Service;
 
@@ -39,6 +33,10 @@ class UserService
             'role' => request()->role
         ];
         User::where('user_id', request()->user_id)->update($data);
+    }
+
+    public function deleteUser(){
+        User::where('user_id', request()->user_id)->delete();
     }
 
 }

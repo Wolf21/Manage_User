@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\UserAdd;
+use App\Http\Requests\UserEdit;
 use App\Http\Service\UserService;
 use Illuminate\Http\Request;
 
@@ -24,15 +25,15 @@ class UserController extends Controller
 
     //Get/User List
     public function index(){
-        $user = self::$userService->listUser();
-        return view('index')->with('users',$user);
+        $users = self::$userService->listUser();
+        return view('index')->with('users',$users);
     }
 
     //Post/User Add
     public function addUser(UserAdd $request) {
         self::$userService->addUser();
-        $user = self::$userService->listUser();
-        return view('list-user')->with('users',$user);
+        $users = self::$userService->listUser();
+        return view('list-user')->with('users',$users);
     }
 
     //Get/User Edit
@@ -42,8 +43,20 @@ class UserController extends Controller
     }
 
     //Post/User Edit
-    public function editUser(UserAdd $request){
+    public function editUser(UserEdit $request){
          self::$userService->editUser();
+        $users = self::$userService->listUser();
+        return view('list-user')->with('users',$users);
+    }
+
+    //Post/ DeleteConfirm
+    public function deleteConfirm(){
+        $user = self::$userService->findUserByUserId();
+        return view('delete-confirm')->with('user',$user);
+    }
+
+    public function deleteUser(){
+        self::$userService->deleteUser();
         $users = self::$userService->listUser();
         return view('list-user')->with('users',$users);
     }

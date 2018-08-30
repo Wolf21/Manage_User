@@ -11,8 +11,6 @@
 |
 */
 
-Auth::routes();
-
 Route::get('/', 'UserController@index'); //User List
 
 //User Add
@@ -21,3 +19,7 @@ Route::post('/add','UserController@addUser');
 //User Edit
 Route::get('/edit','UserController@showEditForm');
 Route::post('/edit','UserController@editUser');
+
+//User delete
+Route::post('/delete-confirm','UserController@deleteConfirm');
+Route::post('/delete-complete','UserController@deleteUser');
