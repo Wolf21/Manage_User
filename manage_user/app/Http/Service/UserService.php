@@ -18,15 +18,15 @@ class UserService
         User::insert($data);
     }
 
-    public function listUser(){
+    public function listUser() {
         return $user = User::all();
     }
 
-    public function findUserByUserId(){
+    public function findUserByUserId() {
         return User::where('user_id' ,request()->user_id)->first();
     }
 
-    public function editUser(){
+    public function editUser() {
         $data = [
             'user_name' => request()->user_name,
             'email' => request()->email,
@@ -35,7 +35,7 @@ class UserService
         User::where('user_id', request()->user_id)->update($data);
     }
 
-    public function deleteUser(){
+    public function deleteUser() {
         User::where('user_id', request()->user_id)->delete();
     }
 

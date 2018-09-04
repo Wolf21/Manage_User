@@ -60,9 +60,10 @@ class UserController extends Controller
      * @Method Post
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (edit)
+     * @throws \Throwable
      */
 
-    public function showEditForm(Request $request){
+    public function showEditForm(Request $request) {
         $user = self::$userService->findUserByUserId();
         return view('edit')->with('user',$user);
     }
@@ -75,7 +76,7 @@ class UserController extends Controller
      * @throws \Throwable
      */
 
-    public function editUser(UserEdit $request){
+    public function editUser(UserEdit $request) {
          self::$userService->editUser();
         $users = self::$userService->listUser();
         $view = view('list-user')->with('users',$users)->render();
@@ -91,7 +92,7 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View (delete-confirm)
      */
 
-    public function deleteConfirm(){
+    public function deleteConfirm() {
         $user = self::$userService->findUserByUserId();
         return view('delete-confirm')->with('user',$user);
     }
@@ -103,7 +104,7 @@ class UserController extends Controller
      * @throws \Throwable
      */
 
-    public function deleteUser(){
+    public function deleteUser() {
         self::$userService->deleteUser();
         $users = self::$userService->listUser();
         $view = view('list-user')->with('users',$users)->render();
