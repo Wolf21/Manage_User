@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Enums\Message;
-use App\Models\User;
+use Faker\Factory as Faker;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -14,6 +14,18 @@ class AddUserTest extends TestCase
 {
     use DatabaseTransactions;
     use WithoutMiddleware;
+
+    private function generateFakerData() {
+        $faker = Faker::create();
+        return $data = [
+            'user_name' => $faker->name,
+            'email' => $faker->safeEmail,
+            'user_id' => $faker->randomAscii,
+            'password' => 'secret',
+            'confirm_password' => 'secret',
+            'role' => \App\Enums\Role::USER
+        ];
+    }
 
     /**
      * @test
@@ -35,13 +47,10 @@ class AddUserTest extends TestCase
      * @return void
      */
     public function addUserWithInvalidEmail() {
-        $response = $this->call('POST','/add', [
-            'user_name' => 'user name',
-            'email' => 'email',
-            'user_id' => 'user ID',
-            'password' => 'secret',
-            'confirm_password' => 'secret'
-        ]);
+        $data = self::generateFakerData();
+        $data['email'] = 'invalid email';
+
+        $response = $this->call('POST','/add', $data);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
@@ -50,13 +59,10 @@ class AddUserTest extends TestCase
      * @return void
      */
     public function addUserWithPasswordNotMatch() {
-        $response = $this->call('POST','/add', [
-            'user_name' => 'user name',
-            'email' => 'email@gmail.com',
-            'user_id' => 'user ID',
-            'password' => 'secret',
-            'confirm_password' => 'victoria_secret'
-        ]);
+        $data = self::generateFakerData();
+        $data['confirm_password'] = 'password_not_match';
+
+        $response = $this->call('POST','/add', $data);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
@@ -65,21 +71,18 @@ class AddUserTest extends TestCase
      * @return void
      */
     public function addUserSuccess() {
-        $response = $this->call('POST','/add', [
-            'user_name' => 'user name',
-            'email' => 'email@gmail.com',
-            'user_id' => 'user ID',
-            'password' => 'secret',
-            'confirm_password' => 'secret',
-            'role' => \App\Enums\Role::USER
-        ]);
+        $data = self::generateFakerData();
+
+        $response = $this->call('POST','/add', $data );
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertDatabaseHas('users', [
-            'user_id' => 'user ID'
+            'user_name' => $data['user_name'],
+            'email' => $data['email'],
+            'user_id' => $data['user_id'],
+            'role' => $data['role']
         ]);   //check that user add success to db
 
-        $view = $response->original;
-        $this->assertEquals(Message::ADD_USER_SUCCESS, $view['message']);  //check message display
-        $response->assertSeeText('user ID'); // check that user display on view
+        $this->assertEquals(Message::ADD_USER_SUCCESS, $response->original['message']);  //check message display
+        $response->assertSeeText($data['user_id']); // check that user display on view
     }
 }
