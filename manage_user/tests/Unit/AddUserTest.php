@@ -7,8 +7,6 @@ use Faker\Factory as Faker;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AddUserTest extends TestCase
 {
@@ -20,7 +18,7 @@ class AddUserTest extends TestCase
         return $data = [
             'user_name' => $faker->name,
             'email' => $faker->safeEmail,
-            'user_id' => $faker->randomAscii,
+            'user_id' => str_random(10),
             'password' => 'secret',
             'confirm_password' => 'secret',
             'role' => \App\Enums\Role::USER

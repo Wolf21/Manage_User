@@ -18,8 +18,7 @@ class EditUserTest extends TestCase
      * @test
      * @return void
      */
-    public function showFormEditUser()
-    {
+    public function showFormEditUser() {
         $user = factory(User::class)->create();
         $response = $this->call('POST', '/edit', [
             'user_id' => $user->user_id
